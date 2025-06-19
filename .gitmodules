@@ -1,0 +1,21 @@
+[submodule "typescript"]
+	path = typescript
+	url = https://github.com/fusuma/carespace-typescript-sdk.git
+[submodule "javascript"]
+	path = javascript
+	url = https://github.com/fusuma/carespace-javascript-sdk.git
+[submodule "swift"]
+	path = swift
+	url = https://github.com/fusuma/carespace-swift-sdk.git
+[submodule "python"]
+	path = python
+	url = https://github.com/fusuma/carespace-python-sdk.git
+[submodule "dotnet"]
+	path = dotnet
+	url = https://github.com/fusuma/carespace-dotnet-sdk.git
+[submodule "kotlin"]
+	path = kotlin
+	url = https://github.com/fusuma/carespace-kotlin-sdk.git
+[submodule "unreal"]
+	path = unreal
+	url = https://github.com/fusuma/carespace-unreal-sdk.git
