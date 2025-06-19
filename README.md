@@ -52,13 +52,38 @@ npm install @carespace/sdk-js
 
 [📖 Swift Documentation](./swift/README.md) | [🔗 Swift Package](https://github.com/carespace/swift-sdk)
 
+### .NET SDK
+**Enterprise-ready SDK with full async support**
+- 🔒 Type-safe C# implementation with nullable reference types
+- ⚡ Modern async/await patterns
+- 🛡️ Comprehensive error handling
+- 🔄 Built-in retry logic with exponential backoff
+- 📦 Full dependency injection support
+
+```bash
+dotnet add package Carespace.SDK
+```
+
+[📖 .NET Documentation](./dotnet/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
+
+### Python SDK
+**Comprehensive async/await Python SDK**
+- 🐍 Python 3.8+ support with full type hints
+- ⚡ Modern async/await syntax
+- 🔒 Type-safe implementation
+- 📦 Easy pip installation
+
+```bash
+pip install carespace-sdk
+```
+
+[📖 Python Documentation](./python/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
+
 ### Coming Soon
 
 | Platform | Language | Status | ETA |
 |----------|----------|--------|-----|
 | 🤖 **Android** | Kotlin | 🚧 In Development | Q2 2024 |
-| 🐍 **Backend** | Python | 📋 Planned | Q2 2024 |
-| 🏢 **Enterprise** | .NET | 📋 Planned | Q3 2024 |
 
 ## 🏃‍♂️ Quick Start
 
@@ -107,6 +132,51 @@ let clientRequest = CreateClientRequest(name: "John Doe", email: "john@example.c
 let client = try await carespace.clients.createClient(clientRequest)
 ```
 
+### .NET/C#
+
+```csharp
+using CarespaceSDK;
+using CarespaceSDK.Models;
+
+using var carespace = CarespaceClient.CreateForDevelopment("your-api-key");
+
+// Authenticate
+var loginResponse = await carespace.LoginAndSetTokenAsync("user@example.com", "password");
+
+// Get users
+var users = await carespace.QuickGetUsersAsync(limit: 10);
+
+// Create a client
+var clientRequest = new CreateClientRequest
+{
+    Name = "John Doe",
+    Email = "john@example.com"
+};
+var client = await carespace.Clients.CreateClientAsync(clientRequest);
+```
+
+### Python
+
+```python
+import asyncio
+from carespace_sdk import CarespaceClient
+
+async def main():
+    async with CarespaceClient(api_key="your-api-key") as carespace:
+        # Authenticate
+        login_response = await carespace.login_and_set_token("user@example.com", "password")
+        
+        # Get users
+        users = await carespace.quick_get_users(limit=10)
+        
+        # Create a client
+        from carespace_sdk import CreateClientRequest
+        client_data = CreateClientRequest(name="John Doe", email="john@example.com")
+        client = await carespace.clients.create_client(client_data)
+
+asyncio.run(main())
+```
+
 ## 🌟 Features
 
 ### Core Functionality
@@ -126,8 +196,8 @@ let client = try await carespace.clients.createClient(clientRequest)
 ### Platform Support
 - **Web** - React, Vue, Angular, vanilla JavaScript
 - **Mobile** - React Native, iOS (Swift), Android (Kotlin - coming soon)
-- **Backend** - Node.js, Python (coming soon), .NET (coming soon)
-- **Desktop** - Electron, macOS native
+- **Backend** - Node.js, Python, .NET
+- **Desktop** - Electron, macOS native, Windows (.NET)
 
 ## 📚 Documentation
 
@@ -140,6 +210,8 @@ let client = try await carespace.clients.createClient(clientRequest)
 - [📖 TypeScript SDK Guide](./typescript/README.md)
 - [📖 JavaScript SDK Guide](./javascript/README.md)
 - [📖 Swift SDK Guide](./swift/README.md)
+- [📖 .NET SDK Guide](./dotnet/README.md)
+- [📖 Python SDK Guide](./python/README.md)
 
 ### Examples & Tutorials
 - [💡 Getting Started Guide](https://docs.carespace.ai/getting-started)
@@ -155,9 +227,9 @@ carespace-sdk/
 ├── typescript/          # TypeScript SDK
 ├── javascript/          # JavaScript SDK  
 ├── swift/              # Swift SDK
+├── python/             # Python SDK
+├── dotnet/             # .NET SDK
 ├── kotlin/             # Kotlin SDK (coming soon)
-├── python/             # Python SDK (coming soon)
-├── dotnet/             # .NET SDK (coming soon)
 ├── shared/             # Shared OpenAPI specs
 └── examples/           # Example projects
 ```
@@ -181,6 +253,14 @@ npm install
 # Swift SDK
 cd ../swift
 swift build
+
+# Python SDK
+cd ../python
+pip install -e .
+
+# .NET SDK
+cd ../dotnet
+dotnet build
 ```
 
 ### Contributing
@@ -206,6 +286,12 @@ cd javascript && npm test
 
 # Swift
 cd swift && swift test
+
+# Python
+cd python && python -m pytest
+
+# .NET
+cd dotnet && dotnet test
 ```
 
 ## 🔐 Authentication
