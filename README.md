@@ -24,7 +24,7 @@ Carespace provides comprehensive SDKs for multiple programming languages, enabli
 npm install @carespace/sdk-ts
 ```
 
-[📖 TypeScript Documentation](./typescript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-ts)
+[📖 TypeScript Documentation](https://github.com/fusuma/carespace-typescript-sdk/blob/main/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-ts)
 
 ### JavaScript SDK
 **Lightweight, dependency-free JavaScript SDK**
@@ -37,7 +37,7 @@ npm install @carespace/sdk-ts
 npm install @carespace/sdk-js
 ```
 
-[📖 JavaScript Documentation](./javascript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-js)
+[📖 JavaScript Documentation](https://github.com/fusuma/carespace-javascript-sdk/blob/main/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-js)
 
 ### Swift SDK
 **Native iOS/macOS SDK with async/await**
@@ -50,7 +50,7 @@ npm install @carespace/sdk-js
 .package(url: "https://github.com/carespace/swift-sdk.git", from: "1.0.0")
 ```
 
-[📖 Swift Documentation](./swift/README.md) | [🔗 Swift Package](https://github.com/carespace/swift-sdk)
+[📖 Swift Documentation](https://github.com/fusuma/carespace-swift-sdk/blob/main/README.md) | [🔗 Swift Package](https://github.com/fusuma/carespace-swift-sdk)
 
 ### .NET SDK
 **Enterprise-ready SDK with full async support**
@@ -64,7 +64,7 @@ npm install @carespace/sdk-js
 dotnet add package Carespace.SDK
 ```
 
-[📖 .NET Documentation](./dotnet/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
+[📖 .NET Documentation](https://github.com/fusuma/carespace-dotnet-sdk/blob/main/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
 
 ### Python SDK
 **Comprehensive async/await Python SDK**
@@ -77,13 +77,36 @@ dotnet add package Carespace.SDK
 pip install carespace-sdk
 ```
 
-[📖 Python Documentation](./python/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
+[📖 Python Documentation](https://github.com/fusuma/carespace-python-sdk/blob/main/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
 
-### Coming Soon
+### Kotlin SDK
+**Multiplatform SDK with Android optimization**
+- 🚀 Kotlin Multiplatform (Android, JVM)
+- ⚡ Coroutines with suspend functions
+- 🔒 Type-safe data classes
+- 📱 Android lifecycle awareness
+- 🧪 Comprehensive testing
 
-| Platform | Language | Status | ETA |
-|----------|----------|--------|-----|
-| 🤖 **Android** | Kotlin | 🚧 In Development | Q2 2024 |
+```bash
+implementation("com.carespace:sdk-kotlin:1.0.0")
+```
+
+[📖 Kotlin Documentation](https://github.com/fusuma/carespace-kotlin-sdk/blob/main/README.md) | [🔗 Maven Central](https://search.maven.org/artifact/com.carespace/sdk-kotlin)
+
+### Unreal Engine SDK
+**Native C++ SDK for Unreal Engine**
+- 🎮 Unreal Engine 5.0+ support
+- ⚡ Async Blueprint nodes
+- 🔒 Type-safe C++ implementation
+- 🎯 Game development optimized
+- 📦 Plugin-based integration
+
+```cpp
+// Add to your .uproject plugins section
+"CarespaceSDK": { "Enabled": true }
+```
+
+[📖 Unreal Documentation](https://github.com/fusuma/carespace-unreal-sdk/blob/main/README.md) | [🔗 Unreal Marketplace](https://www.unrealengine.com/marketplace/carespace-sdk)
 
 ## 🏃‍♂️ Quick Start
 
@@ -195,7 +218,7 @@ asyncio.run(main())
 
 ### Platform Support
 - **Web** - React, Vue, Angular, vanilla JavaScript
-- **Mobile** - React Native, iOS (Swift), Android (Kotlin - coming soon)
+- **Mobile** - React Native, iOS (Swift), Android (Kotlin)
 - **Backend** - Node.js, Python, .NET
 - **Desktop** - Electron, macOS native, Windows (.NET)
 
@@ -207,11 +230,13 @@ asyncio.run(main())
 - [🔗 Postman Collection](https://www.postman.com/carespace-api)
 
 ### SDK Guides
-- [📖 TypeScript SDK Guide](./typescript/README.md)
-- [📖 JavaScript SDK Guide](./javascript/README.md)
-- [📖 Swift SDK Guide](./swift/README.md)
-- [📖 .NET SDK Guide](./dotnet/README.md)
-- [📖 Python SDK Guide](./python/README.md)
+- [📖 TypeScript SDK Guide](https://github.com/fusuma/carespace-typescript-sdk/blob/main/README.md)
+- [📖 JavaScript SDK Guide](https://github.com/fusuma/carespace-javascript-sdk/blob/main/README.md)
+- [📖 Swift SDK Guide](https://github.com/fusuma/carespace-swift-sdk/blob/main/README.md)
+- [📖 .NET SDK Guide](https://github.com/fusuma/carespace-dotnet-sdk/blob/main/README.md)
+- [📖 Python SDK Guide](https://github.com/fusuma/carespace-python-sdk/blob/main/README.md)
+- [📖 Kotlin SDK Guide](https://github.com/fusuma/carespace-kotlin-sdk/blob/main/README.md)
+- [📖 Unreal SDK Guide](https://github.com/fusuma/carespace-unreal-sdk/blob/main/README.md)
 
 ### Examples & Tutorials
 - [💡 Getting Started Guide](https://docs.carespace.ai/getting-started)
@@ -223,44 +248,50 @@ asyncio.run(main())
 ### Project Structure
 
 ```
-carespace-sdk/
-├── typescript/          # TypeScript SDK
-├── javascript/          # JavaScript SDK  
-├── swift/              # Swift SDK
-├── python/             # Python SDK
-├── dotnet/             # .NET SDK
-├── kotlin/             # Kotlin SDK (coming soon)
-├── shared/             # Shared OpenAPI specs
-└── examples/           # Example projects
+carespace-sdk/ (main repository)
+├── README.md                   # Main documentation
+├── .gitmodules                # Submodule configuration
+├── typescript/                # → fusuma/carespace-typescript-sdk
+├── javascript/                # → fusuma/carespace-javascript-sdk  
+├── swift/                     # → fusuma/carespace-swift-sdk
+├── python/                    # → fusuma/carespace-python-sdk
+├── dotnet/                    # → fusuma/carespace-dotnet-sdk
+├── kotlin/                    # → fusuma/carespace-kotlin-sdk
+├── unreal/                    # → fusuma/carespace-unreal-sdk
+└── shared/                    # Shared resources (OpenAPI specs)
 ```
 
 ### Building from Source
 
 ```bash
-# Clone the repository
-git clone https://github.com/carespace/sdk-monorepo.git
+# Clone the main repository with submodules
+git clone --recursive https://github.com/fusuma/carespace-sdk.git
 cd carespace-sdk
 
+# Or if already cloned, initialize submodules
+git submodule update --init --recursive
+
+# Build individual SDKs
 # TypeScript SDK
-cd typescript
-npm install
-npm run build
+cd typescript && npm install && npm run build && cd ..
 
 # JavaScript SDK  
-cd ../javascript
-npm install
+cd javascript && npm install && cd ..
 
 # Swift SDK
-cd ../swift
-swift build
+cd swift && swift build && cd ..
 
 # Python SDK
-cd ../python
-pip install -e .
+cd python && pip install -e . && cd ..
 
 # .NET SDK
-cd ../dotnet
-dotnet build
+cd dotnet && dotnet build && cd ..
+
+# Kotlin SDK
+cd kotlin && ./gradlew build && cd ..
+
+# Unreal SDK (requires Unreal Engine)
+cd unreal && # Follow Unreal-specific build instructions
 ```
 
 ### Contributing
@@ -292,6 +323,12 @@ cd python && python -m pytest
 
 # .NET
 cd dotnet && dotnet test
+
+# Kotlin
+cd kotlin && ./gradlew test
+
+# Unreal
+cd unreal && # Follow Unreal-specific test instructions
 ```
 
 ## 🔐 Authentication
