@@ -1,302 +1,934 @@
-# Carespace SDK
+# Carespace Kotlin SDK
 
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.9.20-blue.svg)](https://kotlinlang.org/)
+[![Multiplatform](https://img.shields.io/badge/Kotlin-Multiplatform-orange.svg)](https://kotlinlang.org/docs/multiplatform.html)
+[![Android](https://img.shields.io/badge/Android-24%2B-green.svg)](https://developer.android.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
-[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Swift](https://img.shields.io/badge/Swift-FA7343?logo=swift&logoColor=white)](https://swift.org/)
 
-Official SDKs for the Carespace API - Build powerful healthcare and rehabilitation applications with ease.
+Official Kotlin SDK for the Carespace API - Build powerful healthcare and rehabilitation applications with modern Kotlin multiplatform support.
 
-## Overview
+## Features
 
-Carespace provides comprehensive SDKs for multiple programming languages, enabling developers to integrate with the Carespace API seamlessly. Whether you're building web applications, mobile apps, or backend services, we have you covered.
+- 🚀 **Kotlin Multiplatform** - Supports Android, JVM, and more
+- ⚡ **Coroutines** - Modern async programming with suspend functions
+- 🔒 **Type Safety** - Fully type-safe with data classes and sealed classes
+- 📦 **Kotlinx.serialization** - Fast and efficient JSON serialization
+- 🌐 **Ktor Client** - Modern HTTP client with retry logic
+- 📱 **Android Optimized** - Lifecycle-aware components and secure storage
+- 🧪 **Well Tested** - Comprehensive unit tests with MockK
+- 📚 **Rich Documentation** - KDoc comments and examples
 
-## 🚀 Available SDKs
+## Installation
 
-### TypeScript SDK
-**Full-featured SDK with complete type safety**
-- 🔒 Complete TypeScript definitions
-- 🚀 Modern async/await support
-- 📦 Tree-shakeable modules
-- 🛡️ Built-in error handling
+### Gradle (Kotlin DSL)
 
-```bash
-npm install @carespace/sdk-ts
+Add to your `build.gradle.kts`:
+
+```kotlin
+dependencies {
+    implementation("com.carespace:sdk-kotlin:1.0.0")
+}
 ```
 
-[📖 TypeScript Documentation](./typescript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-ts)
+### Android
 
-### JavaScript SDK
-**Lightweight, dependency-free JavaScript SDK**
-- ⚡ Zero dependencies
-- 🌐 Modern ES6 modules
-- 🔄 Native fetch API
-- 📱 Browser and Node.js compatible
+For Android projects, add the Android-specific dependency:
 
-```bash
-npm install @carespace/sdk-js
+```kotlin
+dependencies {
+    implementation("com.carespace:sdk-kotlin-android:1.0.0")
+}
 ```
 
-[📖 JavaScript Documentation](./javascript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-js)
+### Maven
 
-### Swift SDK
-**Native iOS/macOS SDK with async/await**
-- 📱 iOS 13+ / macOS 10.15+ support
-- ⚡ Modern async/await syntax
-- 🔒 Type-safe Swift implementation
-- 🧩 SwiftUI ready
-
-```swift
-.package(url: "https://github.com/carespace/swift-sdk.git", from: "1.0.0")
+```xml
+<dependency>
+    <groupId>com.carespace</groupId>
+    <artifactId>sdk-kotlin</artifactId>
+    <version>1.0.0</version>
+</dependency>
 ```
 
-[📖 Swift Documentation](./swift/README.md) | [🔗 Swift Package](https://github.com/fusuma/carespace-swift-sdk)
+## Quick Start
 
-### .NET SDK
-**Enterprise-ready SDK with full async support**
-- 🔒 Type-safe C# implementation with nullable reference types
-- ⚡ Modern async/await patterns
-- 🛡️ Comprehensive error handling
-- 🔄 Built-in retry logic with exponential backoff
-- 📦 Full dependency injection support
+### Basic Usage (JVM/Android)
 
-```bash
-dotnet add package Carespace.SDK
-```
+```kotlin
+import com.carespace.sdk.CarespaceClient
+import com.carespace.sdk.models.*
 
-[📖 .NET Documentation](./dotnet/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
-
-### Python SDK
-**Comprehensive async/await Python SDK**
-- 🐍 Python 3.8+ support with full type hints
-- ⚡ Modern async/await syntax
-- 🔒 Type-safe implementation
-- 📦 Easy pip installation
-
-```bash
-pip install carespace-sdk
-```
-
-[📖 Python Documentation](./python/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
-
-### Kotlin SDK
-**Multiplatform SDK with Android optimization**
-- 🚀 Kotlin Multiplatform (Android, JVM)
-- ⚡ Coroutines with suspend functions
-- 🔒 Type-safe data classes
-- 📱 Android lifecycle awareness
-- 🧪 Comprehensive testing
-
-```bash
-implementation("com.carespace:sdk-kotlin:1.0.0")
-```
-
-[📖 Kotlin Documentation](./kotlin/README.md) | [🔗 Maven Central](https://search.maven.org/artifact/com.carespace/sdk-kotlin)
-
-### Unreal Engine SDK
-**Native C++ SDK for Unreal Engine**
-- 🎮 Unreal Engine 5.0+ support
-- ⚡ Async Blueprint nodes
-- 🔒 Type-safe C++ implementation
-- 🎯 Game development optimized
-- 📦 Plugin-based integration
-
-```cpp
-// Add to your .uproject plugins section
-"CarespaceSDK": { "Enabled": true }
-```
-
-[📖 Unreal Documentation](./unreal/README.md) | [🔗 Unreal Marketplace](https://www.unrealengine.com/marketplace/carespace-sdk)
-
-## 🏃‍♂️ Quick Start
-
-### TypeScript/JavaScript
-
-```typescript
-import { CarespaceAPI } from '@carespace/sdk-ts';
-
-const carespace = new CarespaceAPI({
-  apiKey: 'your-api-key',
-  baseURL: 'https://api.carespace.ai'
-});
+// Create client
+val client = CarespaceClient.forDevelopment("your-api-key")
 
 // Authenticate
-const loginResponse = await carespace.auth.login({
-  email: 'user@example.com',
-  password: 'password'
-});
+val loginResponse = client.loginAndSetToken("user@example.com", "password")
+println("Logged in as: ${loginResponse.user.name}")
 
 // Get users
-const users = await carespace.users.getUsers();
+val users = client.quickGetUsers(limit = 10)
+println("Found ${users.data.size} users")
 
 // Create a client
-const client = await carespace.clients.createClient({
-  name: 'John Doe',
-  email: 'john@example.com'
-});
+val newClient = CreateClientRequest(
+    name = "John Doe",
+    email = "john@example.com",
+    phone = "+1-555-0123"
+)
+val createdClient = client.clients.createClient(newClient)
+println("Created client: ${createdClient.data?.id}")
+
+// Clean up
+client.close()
 ```
 
-### Swift
+### Android with Lifecycle
 
-```swift
-import CarespaceSDK
+```kotlin
+import com.carespace.sdk.android.CarespaceAndroidClient
+import com.carespace.sdk.android.AuthViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-let carespace = CarespaceAPI(apiKey: "your-api-key")
-
-// Authenticate
-let loginRequest = LoginRequest(email: "user@example.com", password: "password")
-let loginResponse = try await carespace.auth.login(loginRequest)
-
-// Get users
-let usersResponse = try await carespace.users.getUsers()
-
-// Create a client
-let clientRequest = CreateClientRequest(name: "John Doe", email: "john@example.com")
-let client = try await carespace.clients.createClient(clientRequest)
-```
-
-### .NET/C#
-
-```csharp
-using CarespaceSDK;
-using CarespaceSDK.Models;
-
-using var carespace = CarespaceClient.CreateForDevelopment("your-api-key");
-
-// Authenticate
-var loginResponse = await carespace.LoginAndSetTokenAsync("user@example.com", "password");
-
-// Get users
-var users = await carespace.QuickGetUsersAsync(limit: 10);
-
-// Create a client
-var clientRequest = new CreateClientRequest
-{
-    Name = "John Doe",
-    Email = "john@example.com"
-};
-var client = await carespace.Clients.CreateClientAsync(clientRequest);
-```
-
-### Python
-
-```python
-import asyncio
-from carespace_sdk import CarespaceClient
-
-async def main():
-    async with CarespaceClient(api_key="your-api-key") as carespace:
-        # Authenticate
-        login_response = await carespace.login_and_set_token("user@example.com", "password")
+class MainActivity : AppCompatActivity() {
+    private val authViewModel: AuthViewModel by viewModel()
+    
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         
-        # Get users
-        users = await carespace.quick_get_users(limit=10)
+        // Create Android client
+        val client = CarespaceAndroidClient.forDevelopment(this, "your-api-key")
         
-        # Create a client
-        from carespace_sdk import CreateClientRequest
-        client_data = CreateClientRequest(name="John Doe", email="john@example.com")
-        client = await carespace.clients.create_client(client_data)
-
-asyncio.run(main())
+        // Use with lifecycle
+        client.executeWithLifecycle(
+            lifecycleOwner = this,
+            onSuccess = { users: PaginatedResponse<User> ->
+                // Handle success
+            },
+            onError = { error ->
+                // Handle error
+            }
+        ) {
+            client.users.getUsers()
+        }
+    }
+}
 ```
 
-## 🌟 Features
+### Compose UI with ViewModels
 
-### Core Functionality
-- **Authentication** - Login, logout, token management, password reset
-- **User Management** - CRUD operations, profiles, settings, permissions
-- **Client Management** - Patient records, medical history, program assignments
-- **Program Management** - Exercise programs, templates, customization
-- **Analytics** - Progress tracking, reports, statistics
-
-### Developer Experience
-- **Type Safety** - Full TypeScript support with generated types
-- **Error Handling** - Comprehensive error types and handling
-- **Documentation** - Extensive docs with examples
-- **Testing** - Built-in test suites
-- **Modern APIs** - Async/await, promises, modern JavaScript
-
-### Platform Support
-- **Web** - React, Vue, Angular, vanilla JavaScript
-- **Mobile** - React Native, iOS (Swift), Android (Kotlin)
-- **Backend** - Node.js, Python, .NET
-- **Desktop** - Electron, macOS native, Windows (.NET)
-
-## 📚 Documentation
-
-### API Reference
-- [🔗 API Documentation](https://docs.carespace.ai/api)
-- [🔗 OpenAPI Specification](./shared/swagger-merged-corrected.json)
-- [🔗 Postman Collection](https://www.postman.com/carespace-api)
-
-### SDK Guides
-- [📖 TypeScript SDK Guide](https://github.com/fusuma/carespace-typescript-sdk/blob/main/README.md)
-- [📖 JavaScript SDK Guide](https://github.com/fusuma/carespace-javascript-sdk/blob/main/README.md)
-- [📖 Swift SDK Guide](https://github.com/fusuma/carespace-swift-sdk/blob/main/README.md)
-- [📖 .NET SDK Guide](https://github.com/fusuma/carespace-dotnet-sdk/blob/main/README.md)
-- [📖 Python SDK Guide](https://github.com/fusuma/carespace-python-sdk/blob/main/README.md)
-- [📖 Kotlin SDK Guide](https://github.com/fusuma/carespace-kotlin-sdk/blob/main/README.md)
-- [📖 Unreal SDK Guide](https://github.com/fusuma/carespace-unreal-sdk/blob/main/README.md)
-
-### Examples & Tutorials
-- [💡 Getting Started Guide](https://docs.carespace.ai/getting-started)
-- [🎯 Integration Examples](https://github.com/carespace/examples)
-- [🎓 Video Tutorials](https://www.youtube.com/carespace-dev)
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-carespace-sdk/ (main repository)
-├── README.md                   # Main documentation
-├── .gitmodules                # Submodule configuration
-├── typescript/                # → fusuma/carespace-typescript-sdk
-├── javascript/                # → fusuma/carespace-javascript-sdk  
-├── swift/                     # → fusuma/carespace-swift-sdk
-├── python/                    # → fusuma/carespace-python-sdk
-├── dotnet/                    # → fusuma/carespace-dotnet-sdk
-├── kotlin/                    # → fusuma/carespace-kotlin-sdk
-├── unreal/                    # → fusuma/carespace-unreal-sdk
-└── shared/                    # Shared resources (OpenAPI specs)
+```kotlin
+@Composable
+fun UsersScreen(
+    usersViewModel: UsersViewModel = koinViewModel()
+) {
+    val users by usersViewModel.users.collectAsState()
+    val isLoading by usersViewModel.isLoading.collectAsState()
+    
+    LaunchedEffect(Unit) {
+        usersViewModel.getUsers()
+    }
+    
+    when {
+        isLoading -> CircularProgressIndicator()
+        else -> {
+            LazyColumn {
+                items(users) { user ->
+                    UserItem(user = user)
+                }
+            }
+        }
+    }
+}
 ```
 
-### Building from Source
+## Configuration
+
+### Environment Configurations
+
+```kotlin
+// Development
+val devClient = CarespaceClient.forDevelopment("api-key")
+
+// Production
+val prodClient = CarespaceClient.forProduction("api-key")
+
+// Staging
+val stagingClient = CarespaceClient.forStaging("api-key")
+
+// Custom configuration
+val customConfig = CarespaceConfiguration(
+    baseUrl = "https://custom-api.carespace.ai",
+    apiKey = "your-api-key",
+    timeout = 60.seconds,
+    maxRetryAttempts = 5,
+    enableLogging = true
+)
+val customClient = CarespaceClient.withConfiguration(customConfig)
+```
+
+### Android Dependency Injection
+
+```kotlin
+// Koin module
+val appModule = module {
+    single { CarespaceAndroidClient.forDevelopment(get()) }
+    viewModel { AuthViewModel(get()) }
+    viewModel { UsersViewModel(get()) }
+    viewModel { ClientsViewModel(get()) }
+    viewModel { ProgramsViewModel(get()) }
+}
+
+// Application class
+class MyApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+        startKoin {
+            androidContext(this@MyApplication)
+            modules(appModule)
+        }
+    }
+}
+```
+
+## API Reference
+
+### Authentication
+
+```kotlin
+// Login
+val loginResponse = client.auth.login("user@example.com", "password")
+
+// Refresh token
+val refreshResponse = client.auth.refreshToken("refresh-token")
+
+// Change password
+client.auth.changePassword("currentPassword", "newPassword")
+
+// Logout
+client.auth.logout()
+```
+
+### Users
+
+```kotlin
+// Get users with pagination and filtering
+val users = client.users.getUsers(
+    page = 1,
+    limit = 20,
+    search = "john",
+    role = UserRole.PATIENT,
+    isActive = true
+)
+
+// Get specific user
+val user = client.users.getUser("user-id")
+
+// Create user
+val newUser = CreateUserRequest(
+    email = "user@example.com",
+    name = "John Doe",
+    firstName = "John",
+    lastName = "Doe",
+    password = "SecurePassword123!",
+    role = UserRole.PATIENT
+)
+val createdUser = client.users.createUser(newUser)
+
+// Update user
+val updateUser = UpdateUserRequest(name = "Jane Doe")
+client.users.updateUser("user-id", updateUser)
+```
+
+### Clients
+
+```kotlin
+// Get clients
+val clients = client.clients.getClients(
+    page = 1,
+    limit = 20,
+    search = "doe",
+    providerId = "provider-id"
+)
+
+// Create client with medical info
+val newClient = CreateClientRequest(
+    name = "Jane Doe",
+    email = "jane@example.com",
+    phone = "+1-555-0456",
+    dateOfBirth = "1990-01-01",
+    medicalInfo = MedicalInfo(
+        allergies = listOf("Peanuts"),
+        conditions = listOf("Hypertension"),
+        notes = "Patient notes"
+    )
+)
+val createdClient = client.clients.createClient(newClient)
+
+// Get client statistics
+val stats = client.clients.getClientStats("client-id")
+println("Total sessions: ${stats.data?.totalSessions}")
+
+// Assign program to client
+client.clients.assignProgram("client-id", "program-id")
+```
+
+### Programs
+
+```kotlin
+// Get programs with filtering
+val programs = client.programs.getPrograms(
+    page = 1,
+    limit = 20,
+    category = ProgramCategory.REHABILITATION,
+    difficulty = ProgramDifficulty.BEGINNER
+)
+
+// Create program
+val newProgram = CreateProgramRequest(
+    name = "Post-Surgery Knee Rehabilitation",
+    description = "Comprehensive knee rehabilitation program",
+    category = ProgramCategory.REHABILITATION,
+    difficulty = ProgramDifficulty.BEGINNER,
+    duration = 30,
+    isPublic = true
+)
+val createdProgram = client.programs.createProgram(newProgram)
+
+// Add exercise to program
+val exercise = CreateExerciseRequest(
+    name = "Knee Flexion",
+    description = "Gentle knee bending exercise",
+    duration = 60,
+    repetitions = 10,
+    sets = 3,
+    order = 1
+)
+client.programs.addExerciseToProgram("program-id", exercise)
+
+// Get program exercises
+val exercises = client.programs.getProgramExercises("program-id")
+```
+
+## Error Handling
+
+The SDK provides comprehensive error handling with specific exception types for different scenarios:
+
+### Exception Types
+
+```kotlin
+try {
+    val user = client.users.getUser("invalid-id")
+} catch (e: CarespaceNotFoundException) {
+    println("User not found")
+} catch (e: CarespaceAuthenticationException) {
+    println("Authentication failed")
+} catch (e: CarespaceValidationException) {
+    println("Validation failed: ${e.errorDetails}")
+} catch (e: CarespaceRateLimitException) {
+    println("Rate limit exceeded. Retry after: ${e.retryAfterSeconds}s")
+} catch (e: CarespaceException) {
+    println("API error: ${e.message} (Status: ${e.statusCode})")
+}
+```
+
+### Network and Timeout Handling
+
+```kotlin
+class NetworkAwareRepository(private val client: CarespaceClient) {
+    
+    suspend fun getUsersWithRetry(maxRetries: Int = 3): ApiResponse<List<User>> {
+        var lastException: Exception? = null
+        
+        repeat(maxRetries) { attempt ->
+            try {
+                return client.users.getUsers()
+            } catch (e: CarespaceNetworkException) {
+                lastException = e
+                if (attempt < maxRetries - 1) {
+                    val delayMs = 1000L * (attempt + 1) // Exponential backoff
+                    delay(delayMs)
+                    println("Network error, retrying in ${delayMs}ms... (attempt ${attempt + 2})")
+                }
+            } catch (e: CarespaceTimeoutException) {
+                lastException = e
+                if (attempt < maxRetries - 1) {
+                    delay(2000L) // Fixed delay for timeout
+                    println("Request timeout, retrying... (attempt ${attempt + 2})")
+                }
+            }
+        }
+        
+        throw lastException ?: CarespaceException("Max retries exceeded")
+    }
+}
+```
+
+### Authentication Refresh Flow
+
+```kotlin
+class AuthenticatedRepository(private val client: CarespaceClient) {
+    
+    suspend fun <T> executeWithTokenRefresh(operation: suspend () -> T): T {
+        try {
+            return operation()
+        } catch (e: CarespaceAuthenticationException) {
+            println("Token expired, attempting refresh...")
+            
+            try {
+                val refreshToken = client.getStoredRefreshToken()
+                val newTokens = client.auth.refreshToken(refreshToken)
+                
+                if (newTokens.success && newTokens.data != null) {
+                    client.setApiKey(newTokens.data.accessToken)
+                    return operation() // Retry with new token
+                } else {
+                    throw CarespaceAuthenticationException("Failed to refresh token")
+                }
+            } catch (refreshError: Exception) {
+                // Redirect to login
+                throw CarespaceAuthenticationException("Please log in again", refreshError)
+            }
+        }
+    }
+}
+```
+
+### Validation Error Handling
+
+```kotlin
+suspend fun createUserWithValidation(request: CreateUserRequest): ApiResponse<User> {
+    try {
+        return client.users.createUser(request)
+    } catch (e: CarespaceValidationException) {
+        // Handle specific validation errors
+        e.errorDetails?.let { errors ->
+            errors.forEach { field, messages ->
+                when (field) {
+                    "email" -> handleEmailErrors(messages)
+                    "password" -> handlePasswordErrors(messages)
+                    "phone" -> handlePhoneErrors(messages)
+                    else -> handleGeneralFieldError(field, messages)
+                }
+            }
+        }
+        throw e
+    }
+}
+
+fun handleEmailErrors(messages: List<String>) {
+    messages.forEach { message ->
+        when {
+            message.contains("already exists") -> {
+                // Show email already exists dialog
+                showEmailExistsDialog()
+            }
+            message.contains("invalid format") -> {
+                // Highlight email field with error
+                showEmailFormatError()
+            }
+        }
+    }
+}
+```
+
+### Rate Limiting with Exponential Backoff
+
+```kotlin
+class RateLimitedClient(private val client: CarespaceClient) {
+    
+    suspend fun <T> executeWithRateLimit(
+        operation: suspend () -> T,
+        maxRetries: Int = 5
+    ): T {
+        var retryCount = 0
+        
+        while (retryCount <= maxRetries) {
+            try {
+                return operation()
+            } catch (e: CarespaceRateLimitException) {
+                if (retryCount == maxRetries) {
+                    throw e
+                }
+                
+                val delaySeconds = e.retryAfterSeconds ?: calculateBackoffDelay(retryCount)
+                println("Rate limited. Retrying after ${delaySeconds}s...")
+                
+                delay(delaySeconds * 1000L)
+                retryCount++
+            }
+        }
+        
+        throw CarespaceException("Rate limit retry attempts exhausted")
+    }
+    
+    private fun calculateBackoffDelay(retryCount: Int): Long {
+        return minOf(2.0.pow(retryCount).toLong(), 60L) // Max 60 seconds
+    }
+}
+```
+
+### Error Recovery Patterns
+
+```kotlin
+class ResilientDataManager(private val client: CarespaceClient) {
+    
+    suspend fun syncDataWithFallback(): List<User> {
+        return try {
+            // Try primary data source
+            val response = client.users.getUsers()
+            if (response.success) {
+                response.data
+            } else {
+                getCachedUsers() // Fallback to cache
+            }
+        } catch (e: CarespaceNetworkException) {
+            println("Network unavailable, using cached data")
+            getCachedUsers()
+        } catch (e: CarespaceException) {
+            println("API error: ${e.message}, using empty state")
+            emptyList()
+        }
+    }
+    
+    private suspend fun getCachedUsers(): List<User> {
+        // Return cached data or empty list
+        return localDatabase.getUsers()
+    }
+}
+```
+
+### UI Error State Management
+
+```kotlin
+// For Android ViewModels
+class ErrorAwareViewModel(private val client: CarespaceClient) : ViewModel() {
+    
+    data class UiState(
+        val isLoading: Boolean = false,
+        val data: List<User> = emptyList(),
+        val error: UiError? = null
+    )
+    
+    sealed class UiError {
+        object NetworkError : UiError()
+        object AuthenticationError : UiError()
+        data class ValidationError(val fields: Map<String, List<String>>) : UiError()
+        data class GenericError(val message: String) : UiError()
+    }
+    
+    private val _uiState = MutableStateFlow(UiState())
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+    
+    fun loadUsers() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true, error = null)
+            
+            try {
+                val response = client.users.getUsers()
+                if (response.success) {
+                    _uiState.value = UiState(data = response.data)
+                } else {
+                    _uiState.value = UiState(error = UiError.GenericError(response.error ?: "Unknown error"))
+                }
+            } catch (e: Exception) {
+                val error = when (e) {
+                    is CarespaceNetworkException -> UiError.NetworkError
+                    is CarespaceAuthenticationException -> UiError.AuthenticationError
+                    is CarespaceValidationException -> UiError.ValidationError(e.errorDetails ?: emptyMap())
+                    else -> UiError.GenericError(e.message ?: "Unknown error")
+                }
+                _uiState.value = UiState(error = error)
+            }
+        }
+    }
+}
+```
+
+## Android Features
+
+### Secure Storage
+
+```kotlin
+// The Android client automatically handles secure token storage
+val client = CarespaceAndroidClient.forDevelopment(context)
+
+// Cache authentication token
+client.cacheApiKey("your-api-key")
+
+// Get cached token
+val cachedKey = client.getCachedApiKey()
+
+// Clear cached token
+client.clearCachedApiKey()
+```
+
+### Network Connectivity
+
+```kotlin
+// Check network availability
+if (client.isNetworkAvailable()) {
+    // Proceed with API calls
+    val users = client.users.getUsers()
+} else {
+    // Handle offline state
+    showOfflineMessage()
+}
+```
+
+### ViewModels
+
+The SDK provides base ViewModels for common operations. Here are complete examples:
+
+#### Base ViewModel Pattern
+
+```kotlin
+abstract class CarespaceViewModel(
+    protected val carespace: CarespaceClient
+) : ViewModel() {
+    
+    private val _isLoading = MutableStateFlow(false)
+    val isLoading: StateFlow<Boolean> = _isLoading.asStateFlow()
+    
+    private val _error = MutableStateFlow<String?>(null)
+    val error: StateFlow<String?> = _error.asStateFlow()
+    
+    protected fun <T> executeAsync(
+        onSuccess: (T) -> Unit = {},
+        onError: (Exception) -> Unit = {},
+        operation: suspend () -> T
+    ) {
+        viewModelScope.launch {
+            try {
+                _isLoading.value = true
+                _error.value = null
+                val result = operation()
+                onSuccess(result)
+            } catch (e: Exception) {
+                _error.value = e.message
+                onError(e)
+            } finally {
+                _isLoading.value = false
+            }
+        }
+    }
+}
+```
+
+#### Users ViewModel
+
+```kotlin
+class UsersViewModel(carespace: CarespaceClient) : CarespaceViewModel(carespace) {
+    
+    private val _users = MutableStateFlow<List<User>>(emptyList())
+    val users: StateFlow<List<User>> = _users.asStateFlow()
+    
+    private val _currentUser = MutableStateFlow<User?>(null)
+    val currentUser: StateFlow<User?> = _currentUser.asStateFlow()
+    
+    fun getUsers(page: Int = 1, limit: Int = 20, search: String? = null) {
+        executeAsync(
+            onSuccess = { response: PaginatedResponse<User> ->
+                _users.value = response.data
+            }
+        ) {
+            carespace.users.getUsers(page, limit, search)
+        }
+    }
+    
+    fun getUserProfile() {
+        executeAsync(
+            onSuccess = { response: ApiResponse<User> ->
+                response.data?.let { _currentUser.value = it }
+            }
+        ) {
+            carespace.users.getUserProfile()
+        }
+    }
+}
+```
+
+#### Clients ViewModel
+
+```kotlin
+class ClientsViewModel(carespace: CarespaceClient) : CarespaceViewModel(carespace) {
+    
+    private val _clients = MutableStateFlow<List<Client>>(emptyList())
+    val clients: StateFlow<List<Client>> = _clients.asStateFlow()
+    
+    private val _selectedClient = MutableStateFlow<Client?>(null)
+    val selectedClient: StateFlow<Client?> = _selectedClient.asStateFlow()
+    
+    private val _clientStats = MutableStateFlow<ClientStats?>(null)
+    val clientStats: StateFlow<ClientStats?> = _clientStats.asStateFlow()
+    
+    fun getClients(page: Int = 1, limit: Int = 20, search: String? = null) {
+        executeAsync(
+            onSuccess = { response: PaginatedResponse<Client> ->
+                _clients.value = response.data
+            }
+        ) {
+            carespace.clients.getClients(page, limit, search)
+        }
+    }
+    
+    fun selectClient(client: Client) {
+        _selectedClient.value = client
+        getClientStats(client.id)
+    }
+    
+    fun createClient(request: CreateClientRequest) {
+        executeAsync(
+            onSuccess = { response: ApiResponse<Client> ->
+                response.data?.let { newClient ->
+                    _clients.value = _clients.value + newClient
+                }
+            }
+        ) {
+            carespace.clients.createClient(request)
+        }
+    }
+    
+    private fun getClientStats(clientId: String) {
+        executeAsync(
+            onSuccess = { response: ApiResponse<ClientStats> ->
+                _clientStats.value = response.data
+            }
+        ) {
+            carespace.clients.getClientStats(clientId)
+        }
+    }
+}
+```
+
+#### Programs ViewModel
+
+```kotlin
+class ProgramsViewModel(carespace: CarespaceClient) : CarespaceViewModel(carespace) {
+    
+    private val _programs = MutableStateFlow<List<Program>>(emptyList())
+    val programs: StateFlow<List<Program>> = _programs.asStateFlow()
+    
+    private val _selectedProgram = MutableStateFlow<Program?>(null)
+    val selectedProgram: StateFlow<Program?> = _selectedProgram.asStateFlow()
+    
+    private val _exercises = MutableStateFlow<List<Exercise>>(emptyList())
+    val exercises: StateFlow<List<Exercise>> = _exercises.asStateFlow()
+    
+    fun getPrograms(
+        page: Int = 1, 
+        limit: Int = 20, 
+        category: ProgramCategory? = null
+    ) {
+        executeAsync(
+            onSuccess = { response: PaginatedResponse<Program> ->
+                _programs.value = response.data
+            }
+        ) {
+            carespace.programs.getPrograms(page, limit, category = category)
+        }
+    }
+    
+    fun selectProgram(program: Program) {
+        _selectedProgram.value = program
+        getProgramExercises(program.id)
+    }
+    
+    fun createProgram(request: CreateProgramRequest) {
+        executeAsync(
+            onSuccess = { response: ApiResponse<Program> ->
+                response.data?.let { newProgram ->
+                    _programs.value = _programs.value + newProgram
+                }
+            }
+        ) {
+            carespace.programs.createProgram(request)
+        }
+    }
+    
+    private fun getProgramExercises(programId: String) {
+        executeAsync(
+            onSuccess = { response: PaginatedResponse<Exercise> ->
+                _exercises.value = response.data
+            }
+        ) {
+            carespace.programs.getProgramExercises(programId)
+        }
+    }
+}
+```
+
+## Examples
+
+### JVM Console Application
+
+Check out the [JVM example](./examples/jvm-app/) for a complete console application demonstrating:
+- Basic API operations
+- Error handling
+- User, client, and program management
+
+Run the example:
+```bash
+cd examples/jvm-app
+../gradlew run
+```
+
+### Android Application
+
+The [Android example](./examples/android-app/) demonstrates:
+- Jetpack Compose UI
+- MVVM architecture with ViewModels
+- Dependency injection with Koin
+- Lifecycle-aware API calls
+- Secure token storage
+
+## Testing
 
 ```bash
-# Clone the main repository with submodules
-git clone --recursive https://github.com/fusuma/carespace-sdk.git
-cd carespace-sdk
+# Run all tests
+./gradlew test
 
-# Or if already cloned, initialize submodules
-git submodule update --init --recursive
+# Run specific platform tests
+./gradlew jvmTest
+./gradlew testDebugUnitTest  # Android
 
-# Build individual SDKs
-# TypeScript SDK
-cd typescript && npm install && npm run build && cd ..
-
-# JavaScript SDK  
-cd javascript && npm install && cd ..
-
-# Swift SDK
-cd swift && swift build && cd ..
-
-# Python SDK
-cd python && pip install -e . && cd ..
-
-# .NET SDK
-cd dotnet && dotnet build && cd ..
-
-# Kotlin SDK
-cd kotlin && ./gradlew build && cd ..
-
-# Unreal SDK (requires Unreal Engine)
-cd unreal && # Follow Unreal-specific build instructions
+# Run with coverage
+./gradlew testCoverageReport
 ```
 
-### Contributing
+## Building from Source
 
-We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+```bash
+# Clone the repository
+git clone https://github.com/carespace/sdk-monorepo.git
+cd carespace-sdk/kotlin
+
+# Build the SDK
+./gradlew build
+
+# Publish to local repository
+./gradlew publishToMavenLocal
+
+# Run examples
+./gradlew :examples:jvm-app:run
+```
+
+## Supported Platforms
+
+| Platform | Status | Minimum Version | Target Release |
+|----------|--------|----------------|----------------|
+| Android | ✅ Supported | API 24+ | Available Now |
+| JVM | ✅ Supported | Java 11+ | Available Now |
+| iOS | 🚧 In Development | iOS 13+ | Q2 2024 |
+| JavaScript | 📋 Planned | ES2018+ | Q3 2024 |
+
+### Platform Roadmap
+
+#### ✅ **Currently Supported**
+
+**Android (API 24+)**
+- Full SDK functionality
+- Lifecycle-aware components
+- Secure token storage with EncryptedSharedPreferences
+- Jetpack Compose integration
+- Material Design 3 support
+
+**JVM (Java 11+)**
+- Complete API coverage
+- Server-side integration support
+- Console application compatibility
+- Spring Boot integration ready
+
+#### 🚧 **iOS - In Development (Target: Q2 2024)**
+
+**Planned Features:**
+- Native iOS SDK with Swift interoperability
+- UIKit and SwiftUI integration examples
+- Keychain integration for secure storage
+- CocoaPods and Swift Package Manager support
+- iOS-specific networking optimizations
+
+**Current Progress:**
+- ✅ Core networking layer completed
+- ✅ Authentication flow implemented
+- 🔄 iOS-specific secure storage (70% complete)
+- 🔄 SwiftUI example app (50% complete)
+- ⏳ CocoaPods integration (planned)
+
+#### 📋 **JavaScript - Planned (Target: Q3 2024)**
+
+**Planned Features:**
+- Browser and Node.js compatibility
+- NPM package distribution
+- TypeScript definitions
+- React/Vue.js integration examples
+- LocalStorage/SessionStorage for token management
+
+**Development Phases:**
+- **Phase 1** (Q3 2024): Core JavaScript SDK
+- **Phase 2** (Q4 2024): Framework-specific integrations
+- **Phase 3** (Q1 2025): Advanced features and optimizations
+
+### Feature Comparison
+
+| Feature | Android | JVM | iOS | JavaScript |
+|---------|---------|-----|-----|------------|
+| Authentication | ✅ | ✅ | 🚧 | 📋 |
+| Users API | ✅ | ✅ | 🚧 | 📋 |
+| Clients API | ✅ | ✅ | 🚧 | 📋 |
+| Programs API | ✅ | ✅ | 🚧 | 📋 |
+| Secure Storage | ✅ | ✅ | 🚧 | 📋 |
+| Offline Support | ✅ | ⏳ | 📋 | 📋 |
+| Push Notifications | ✅ | ❌ | 📋 | ❌ |
+| File Upload | ✅ | ✅ | 🚧 | 📋 |
+
+**Legend:**
+- ✅ Supported
+- 🚧 In Development  
+- 📋 Planned
+- ⏳ Future Consideration
+- ❌ Not Applicable
+
+### Platform-Specific Limitations
+
+#### Current Limitations
+
+**Android:**
+- Minimum API level 24 (Android 7.0)
+- Some advanced features require API 26+
+
+**JVM:**
+- No built-in UI components (server-side focused)
+- Secure storage depends on OS keystore
+
+#### Future Platform Considerations
+
+- **Linux**: Server deployment support (included with JVM)
+- **macOS**: Native app support (considering for 2025)
+- **Windows**: Desktop app support (considering for 2025)
+- **WebAssembly**: High-performance web applications (exploring)
+
+## Requirements
+
+- Kotlin 1.9.20+
+- Android API 24+ (Android 7.0)
+- Java 11+ (for JVM targets)
+- Gradle 8.0+
+
+## Dependencies
+
+- **Kotlin Multiplatform** - Core multiplatform support
+- **Kotlinx.coroutines** - Async programming
+- **Kotlinx.serialization** - JSON serialization
+- **Ktor Client** - HTTP networking
+- **Koin** - Dependency injection (optional)
+
+### Android-specific
+- **AndroidX Lifecycle** - Lifecycle-aware components
+- **EncryptedSharedPreferences** - Secure storage
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](../CONTRIBUTING.md) for details.
 
 1. Fork the repository
 2. Create a feature branch
@@ -304,159 +936,47 @@ We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) f
 4. Add tests
 5. Submit a pull request
 
-### Testing
+## Migration Guide
 
-Each SDK includes comprehensive test suites:
+### From Java/REST API
 
-```bash
-# TypeScript
-cd typescript && npm test
+```kotlin
+// Before (Java/REST)
+RestTemplate restTemplate = new RestTemplate();
+ResponseEntity<String> response = restTemplate.getForEntity(
+    "https://api.carespace.ai/users", String.class);
 
-# JavaScript
-cd javascript && npm test
-
-# Swift
-cd swift && swift test
-
-# Python
-cd python && python -m pytest
-
-# .NET
-cd dotnet && dotnet test
-
-# Kotlin
-cd kotlin && ./gradlew test
-
-# Unreal
-cd unreal && # Follow Unreal-specific test instructions
+// After (Kotlin SDK)
+val client = CarespaceClient.forProduction("api-key")
+val users = client.users.getUsers()
 ```
 
-## 🔐 Authentication
+### Adding to Existing Android Project
 
-All SDKs support multiple authentication methods:
+1. Add the dependency to your `build.gradle.kts`
+2. Initialize the client in your Application class
+3. Set up dependency injection (optional)
+4. Use ViewModels for lifecycle-aware operations
 
-### API Key Authentication
-```typescript
-const carespace = new CarespaceAPI({
-  apiKey: 'your-api-key'
-});
-```
+## License
 
-### OAuth 2.0 / JWT
-```typescript
-// Login to get access token
-const response = await carespace.auth.login({
-  email: 'user@example.com',
-  password: 'password'
-});
+This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
 
-// Set token for subsequent requests
-carespace.setApiKey(response.data.access_token);
-```
+## Support
 
-### Environment Variables
-```bash
-# .env file
-CARESPACE_API_KEY=your-api-key
-CARESPACE_BASE_URL=https://api.carespace.ai
-```
-
-## 🌍 Environments
-
-### Development
-```
-Base URL: https://api-dev.carespace.ai
-Purpose: Development and testing
-Rate Limits: Higher limits for development
-```
-
-### Staging  
-```
-Base URL: https://api-staging.carespace.ai
-Purpose: Pre-production testing
-Rate Limits: Production-like limits
-```
-
-### Production
-```
-Base URL: https://api.carespace.ai
-Purpose: Live applications
-Rate Limits: Standard production limits
-```
-
-## 📊 Usage Examples
-
-### Healthcare Dashboard
-```typescript
-// Get client overview
-const clients = await carespace.clients.getClients({ limit: 10 });
-const stats = await Promise.all(
-  clients.data.data.map(client => 
-    carespace.clients.getClientStats(client.id)
-  )
-);
-
-// Display progress metrics
-const totalSessions = stats.reduce((sum, stat) => 
-  sum + stat.data.total_sessions, 0
-);
-```
-
-### Exercise Program Builder
-```typescript
-// Create rehabilitation program
-const program = await carespace.programs.createProgram({
-  name: 'Post-Surgery Knee Rehabilitation',
-  category: 'rehabilitation',
-  difficulty: 'beginner',
-  duration: 30
-});
-
-// Add exercises
-const exercises = [
-  { name: 'Knee Flexion', duration: 60, repetitions: 10 },
-  { name: 'Heel Slides', duration: 45, repetitions: 15 },
-  { name: 'Ankle Pumps', duration: 30, repetitions: 20 }
-];
-
-for (const exercise of exercises) {
-  await carespace.programs.addExerciseToProgram(program.data.id, exercise);
-}
-```
-
-### Patient Progress Tracking
-```swift
-// Swift example
-let clientId = "client-123"
-let programs = try await carespace.clients.getClientPrograms(clientId)
-
-for program in programs.data {
-    let exercises = try await carespace.programs.getProgramExercises(program.id)
-    print("Program: \\(program.name) - \\(exercises.data.count) exercises")
-}
-```
-
-## 🤝 Community & Support
-
-### Get Help
-- 💬 [Discord Community](https://discord.gg/carespace)
 - 📧 Email: [support@carespace.ai](mailto:support@carespace.ai)
+- 💬 [Discord Community](https://discord.gg/carespace)
 - 🐛 [Report Issues](https://github.com/carespace/sdk-monorepo/issues)
-- 📖 [Documentation](https://docs.carespace.ai)
+- 📖 [API Documentation](https://docs.carespace.ai/api)
 
-### Stay Updated
-- 🐦 [Twitter @carespace_dev](https://twitter.com/carespace_dev)
-- 📝 [Developer Blog](https://blog.carespace.ai)
-- 📺 [YouTube Channel](https://youtube.com/carespace-dev)
-- 📰 [Newsletter](https://carespace.ai/newsletter)
+## Changelog
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-Special thanks to all contributors and the open-source community for making this project possible.
+### Version 1.0.0
+- Initial release with Kotlin Multiplatform support
+- Complete API coverage (Auth, Users, Clients, Programs)
+- Android-specific features and ViewModels
+- Comprehensive testing suite
+- Example applications
 
 ---
 
@@ -464,6 +984,5 @@ Special thanks to all contributors and the open-source community for making this
   <strong>Built with ❤️ by the Carespace Team</strong><br>
   <a href="https://carespace.ai">🌐 Website</a> •
   <a href="https://docs.carespace.ai">📖 Docs</a> •
-  <a href="https://github.com/carespace">🔗 GitHub</a> •
-  <a href="https://twitter.com/carespace_dev">🐦 Twitter</a>
+  <a href="https://github.com/carespace">🔗 GitHub</a>
 </p>
