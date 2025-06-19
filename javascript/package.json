@@ -1,0 +1,16 @@
+{
+  "name": "@carespace/sdk-js",
+  "version": "1.0.0",
+  "description": "JavaScript SDK for Carespace API",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["carespace", "api", "sdk", "javascript"],
+  "author": "Carespace",
+  "license": "MIT",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
