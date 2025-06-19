@@ -24,7 +24,7 @@ Carespace provides comprehensive SDKs for multiple programming languages, enabli
 npm install @carespace/sdk-ts
 ```
 
-[📖 TypeScript Documentation](https://github.com/fusuma/carespace-typescript-sdk/blob/main/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-ts)
+[📖 TypeScript Documentation](./typescript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-ts)
 
 ### JavaScript SDK
 **Lightweight, dependency-free JavaScript SDK**
@@ -37,7 +37,7 @@ npm install @carespace/sdk-ts
 npm install @carespace/sdk-js
 ```
 
-[📖 JavaScript Documentation](https://github.com/fusuma/carespace-javascript-sdk/blob/main/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-js)
+[📖 JavaScript Documentation](./javascript/README.md) | [🔗 NPM Package](https://www.npmjs.com/package/@carespace/sdk-js)
 
 ### Swift SDK
 **Native iOS/macOS SDK with async/await**
@@ -50,7 +50,7 @@ npm install @carespace/sdk-js
 .package(url: "https://github.com/carespace/swift-sdk.git", from: "1.0.0")
 ```
 
-[📖 Swift Documentation](https://github.com/fusuma/carespace-swift-sdk/blob/main/README.md) | [🔗 Swift Package](https://github.com/fusuma/carespace-swift-sdk)
+[📖 Swift Documentation](./swift/README.md) | [🔗 Swift Package](https://github.com/fusuma/carespace-swift-sdk)
 
 ### .NET SDK
 **Enterprise-ready SDK with full async support**
@@ -64,7 +64,7 @@ npm install @carespace/sdk-js
 dotnet add package Carespace.SDK
 ```
 
-[📖 .NET Documentation](https://github.com/fusuma/carespace-dotnet-sdk/blob/main/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
+[📖 .NET Documentation](./dotnet/README.md) | [🔗 NuGet Package](https://www.nuget.org/packages/Carespace.SDK)
 
 ### Python SDK
 **Comprehensive async/await Python SDK**
@@ -77,7 +77,7 @@ dotnet add package Carespace.SDK
 pip install carespace-sdk
 ```
 
-[📖 Python Documentation](https://github.com/fusuma/carespace-python-sdk/blob/main/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
+[📖 Python Documentation](./python/README.md) | [🔗 PyPI Package](https://pypi.org/project/carespace-sdk/)
 
 ### Kotlin SDK
 **Multiplatform SDK with Android optimization**
@@ -91,7 +91,7 @@ pip install carespace-sdk
 implementation("com.carespace:sdk-kotlin:1.0.0")
 ```
 
-[📖 Kotlin Documentation](https://github.com/fusuma/carespace-kotlin-sdk/blob/main/README.md) | [🔗 Maven Central](https://search.maven.org/artifact/com.carespace/sdk-kotlin)
+[📖 Kotlin Documentation](./kotlin/README.md) | [🔗 Maven Central](https://search.maven.org/artifact/com.carespace/sdk-kotlin)
 
 ### Unreal Engine SDK
 **Native C++ SDK for Unreal Engine**
@@ -106,7 +106,7 @@ implementation("com.carespace:sdk-kotlin:1.0.0")
 "CarespaceSDK": { "Enabled": true }
 ```
 
-[📖 Unreal Documentation](https://github.com/fusuma/carespace-unreal-sdk/blob/main/README.md) | [🔗 Unreal Marketplace](https://www.unrealengine.com/marketplace/carespace-sdk)
+[📖 Unreal Documentation](./unreal/README.md) | [🔗 Unreal Marketplace](https://www.unrealengine.com/marketplace/carespace-sdk)
 
 ## 🏃‍♂️ Quick Start
 
